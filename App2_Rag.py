@@ -66,9 +66,7 @@ if uploaded_file is not None and len(st.session_state.messages)==1 :
         #Chunking_embedding
         db=chunking_Embedding(text)
         st.session_state['DB']=db
-from PIL import Image
-image = Image.open(r'C:\Users\EL AOUD\Desktop\Sans titre.jpg')
-
+    
 if st.session_state.messages[-1]["role"] != "ai":
         db=st.session_state['DB']
         llm=HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":1, "max_length":512})
