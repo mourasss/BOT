@@ -2,3 +2,4 @@ streamlit
 langchain
 huggingface-hub
 pypdf
+sentence-transformers
