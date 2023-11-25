@@ -11,9 +11,7 @@ from langchain.chains.question_answering import load_qa_chain
 import os
 import tempfile
 from langchain.document_loaders import PyPDFLoader
-import anthropic
 import streamlit as st
-from PyPDF2 import PdfReader
 import huggingface_hub
 from langchain.text_splitter import CharacterTextSplitter
 
