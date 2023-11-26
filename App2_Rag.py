@@ -16,7 +16,6 @@ import huggingface_hub
 from langchain.text_splitter import CharacterTextSplitter
 
 
-#   @st.cache_data
 def chunking_Embedding(text):
     #chunking
     text_splitter = CharacterTextSplitter(
@@ -43,19 +42,19 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] = Api_token
 
 if "messages" not in st.session_state:
     st.session_state.messages=[{"role": "ai", "content": "Bonjour, veuillez entrer votre Token et charger un fichier dans le volet à gauche !"}]
+if "DB" not in st.session_state:    
+    st.session_state.DB=0
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-   
+        
 if uploaded_file is not None :
     if question := st.chat_input() :
         st.session_state.messages.append({"role":"user","content":question})
         with st.chat_message("user"):
               st.write(question)
-       
 
-
-if uploaded_file is not None and len(st.session_state.messages)==1 : 
+if uploaded_file is not None  and st.session_state.DB==0  : 
         temp_dir = tempfile.TemporaryDirectory()
         temp_file_path = os.path.join(temp_dir.name, uploaded_file.name)
         with open(temp_file_path, "wb") as temp_file:
@@ -64,7 +63,10 @@ if uploaded_file is not None and len(st.session_state.messages)==1 :
         loader = PyPDFLoader(temp_file_path)
         text=loader.load()
         #Chunking_embedding
-        db=chunking_Embedding(text)
+        with st.sidebar:
+            with st.spinner('Entrain de traiter le fichier'):
+                db=chunking_Embedding(text)
+            st.success('Terminé !')
         st.session_state['DB']=db
     
 if st.session_state.messages[-1]["role"] != "ai":
