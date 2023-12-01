@@ -41,7 +41,7 @@ with st.sidebar:
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = Api_token
 
 if "messages" not in st.session_state:
-    st.session_state.messages=[{"role": "ai", "content": "Bonjour, veuillez entrer votre Token et charger un fichier dans le volet à gauche !"}]
+    st.session_state.messages=[{"role": "ai", "content": "Bonjour, vous être connecté sur id_prod veuillez entrer votre Token et charger un fichier dans le volet à gauche !"}]
 if "DB" not in st.session_state:    
     st.session_state.DB=0
 for message in st.session_state.messages:
