@@ -71,7 +71,7 @@ if uploaded_file is not None  and st.session_state.DB==0  :
     
 if st.session_state.messages[-1]["role"] != "ai":
         db=st.session_state['DB']
-        llm=HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.7, "max_length":512})
+        llm=HuggingFaceHub(repo_id="google/flan-ul2", model_kwargs={"temperature":0.7, "max_length":512})
         chain = load_qa_chain(llm, chain_type="stuff")    
         docs = db.similarity_search(question)
         with st.chat_message("assistant"):
